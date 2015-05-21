@@ -9,16 +9,24 @@ module Blergers
   class Post < ActiveRecord::Base
     has_many :post_tags
     has_many :tags, through: :post_tags
+    def self.page(n)
+        Blergers::Post.order(date: :desc).limit(10).offset((n-1)*10)
+    end
   end
 
   class Tag < ActiveRecord::Base
     has_many :post_tags
     has_many :posts, through: :post_tags
+    def self.tag
+      # Blergers::Tag.order(: :asc)
+
+    end
   end
 
   class PostTag < ActiveRecord::Base
     belongs_to :post
     belongs_to :tag
+    PostTag.each do | |
   end
 end
 
